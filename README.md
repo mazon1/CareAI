@@ -31,8 +31,8 @@ CareNotes AI is a web-based application designed to help healthcare professional
 ### **Installation Steps**
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo-name/carenote-ai.git
-   cd carenote-ai
+   git clone https://github.com/your-repo-name/carenotes-ai.git
+   cd carenotes-ai
    ```
 
 2. Install dependencies:
@@ -80,7 +80,7 @@ Follow-Up: Return for a check-up if symptoms persist.
 
 ## **Project Structure**
 ```
-CareNoteAI/
+CareNotesAI/
 ├── app.py                 # Main Streamlit application
 ├── requirements.txt       # List of dependencies
 ├── .streamlit/
