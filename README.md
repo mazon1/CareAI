@@ -1,7 +1,7 @@
 
-# **CareNote AI**
+# **CareNotes AI**
 
-CareNote AI is a web-based application designed to help healthcare professionals generate detailed client notes from concise doctor summaries using Google AI Studio's generative models. The app uses AI to simplify documentation, improve communication, and save time in clinical workflows.
+CareNotes AI is a web-based application designed to help healthcare professionals generate detailed client notes from concise doctor summaries using Google AI Studio's generative models. The app uses AI to simplify documentation, improve communication, and save time in clinical workflows.
 
 ---
 
