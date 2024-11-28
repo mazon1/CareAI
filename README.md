@@ -1,7 +1,7 @@
 
-# **CareNotes AI**
+# **CareNote AI**
 
-CareNotes AI is a web-based application designed to help healthcare professionals generate detailed client notes from concise doctor summaries using Google AI Studio's generative models. The app uses AI to simplify documentation, improve communication, and save time in clinical workflows.
+CareNote AI is a web-based application designed to help healthcare professionals generate detailed client notes from concise doctor summaries using Google AI Studio's generative models. The app uses AI to simplify documentation, improve communication, and save time in clinical workflows.
 
 ---
 
@@ -31,8 +31,8 @@ CareNotes AI is a web-based application designed to help healthcare professional
 ### **Installation Steps**
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo-name/carenotes-ai.git
-   cd carenotes-ai
+   git clone https://github.com/your-repo-name/CareNote-ai.git
+   cd CareNote-ai
    ```
 
 2. Install dependencies:
@@ -80,7 +80,7 @@ Follow-Up: Return for a check-up if symptoms persist.
 
 ## **Project Structure**
 ```
-CareNotesAI/
+CareNoteAI/
 ├── app.py                 # Main Streamlit application
 ├── requirements.txt       # List of dependencies
 ├── .streamlit/
