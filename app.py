@@ -45,7 +45,7 @@ def generate_notes(summary):
 
 # Streamlit app
 def main():
-    st.title("CareNote AI")
+    st.title("CareNotes AI")
     st.markdown("Generate detailed client notes from doctor summaries using AI.")
 
     if "chat_history" not in st.session_state:
