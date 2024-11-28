@@ -1,38 +1,54 @@
 import streamlit as st
-import requests
+import google.generativeai as genai
+import os
 
-# Streamlit UI
-st.title("CareNote AI")
-st.markdown("Generate detailed client notes from doctor summaries using AI.")
+# Set up the API key
+GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY', st.secrets.get("GOOGLE_API_KEY"))
+genai.configure(api_key=GOOGLE_API_KEY)
 
-# Input field for doctor summary
-summary = st.text_area("Enter Doctor Summary:", placeholder="e.g., Patient recovering from flu...")
 
-# Button to generate notes
-if st.button("Generate Notes"):
-    if summary.strip():
-        # Simulate API call to Gemini Nano AI
-        with st.spinner("Generating notes..."):
-            generated_notes = generate_notes(summary)
-        st.text_area("Generated Notes:", value=generated_notes, height=200, placeholder="Your detailed notes will appear here.")
-    else:
-        st.warning("Please enter a doctor summary.")
-
-# Simulated function to generate notes
+# Function to generate client notes from doctor summaries
 def generate_notes(summary):
     try:
-        # Replace with the actual API endpoint and your API key
-        api_url = "https://api.geminiai.example.com/generate"
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer YOUR_API_KEY"
-        }
-        response = requests.post(api_url, json={"summary": summary}, headers=headers)
-        
-        if response.status_code == 200:
-            data = response.json()
-            return data.get("notes", "No notes returned from API.")
-        else:
-            return f"Error: {response.status_code} - {response.text}"
+        # Use a pre-trained generative model (e.g., Gemini)
+        model = genai.GenerativeModel('gemini-pro')
+        response = model.generate_content(summary)  # Pass the summary directly
+
+        # Debug: Print the response structure
+        # st.write(response) # Uncomment for debugging
+
+        # Return the generated notes
+        return response.text  # Use 'text' attribute instead of 'generated_text'
     except Exception as e:
-        return f"An error occurred: {e}"
+        st.error(f"Error generating notes: {e}")
+        return "Sorry, I couldn't process your request."
+
+
+# Streamlit app
+def main():
+    st.title("CareNote AI")
+    st.markdown("Generate detailed client notes from doctor summaries using AI.")
+
+    if "chat_history" not in st.session_state:
+        st.session_state.chat_history = []
+
+    # Input area for doctor summary
+    summary = st.text_area("Enter Doctor Summary:", placeholder="e.g., Patient recovering from flu, prescribed rest and hydration.")
+
+    # Button to generate notes
+    if st.button("Generate Notes"):
+        if summary.strip():
+            st.session_state.chat_history.append({"role": "doctor", "content": summary})
+            notes = generate_notes(summary)
+            st.session_state.chat_history.append({"role": "assistant", "content": notes})
+        else:
+            st.warning("Please enter a valid doctor summary.")
+
+    # Display conversation history
+    st.subheader("Generated Notes")
+    for message in st.session_state.chat_history:
+        st.write(f"**{message['role'].capitalize()}**: {message['content']}")
+
+
+if __name__ == "__main__":
+    main()
